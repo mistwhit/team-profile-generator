@@ -1,67 +1,106 @@
 const inquirer = require('inquirer');
+const jest = require('jest');
 const fs = require('fs');
 
-const generateHTML = ({ name, location, github, linkedin }) =>
+const generateHTML = ({ mgrName, mgrID, mgrEmail, mgrOffice, engrName, engrID, engrEmail, engrGitHub, intName, intID, intEmail, intSchool }) =>
   `<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <title>Document</title>
+  <title>Team Profile</title>
 </head>
 <body>
-  <div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Hi! My name is ${name}</h1>
-    <p class="lead">I am from ${location}.</p>
-    <h3>Example heading <span class="badge badge-secondary">Contact Me</span></h3>
-    <ul class="list-group">
-      <li class="list-group-item">My GitHub username is ${github}</li>
-      <li class="list-group-item">LinkedIn: ${linkedin}</li>
-    </ul>
-  </div>
-</div>
+    <h1>Team Profile</h1>
+        <div>${mgrName}</div>
+        <div>${mgrID}</div>
+        <div>${mgrEmail}</div>
+        <div>${mgrOffice}</div>
+        <div>${engrName}</div>
+        <div>${engrID}</div>
+        <div>${engrEmail}</div>
+        <div>${engrGitHub}</div>
+        <div>${intName}</div>
+        <div>${intID}</div>
+        <div>${intEmail}</div>
+        <div>${intSchool}</div>
 </body>
 </html>`;
 
 inquirer
   .prompt([
     {
-      type: 'input',
-      name: 'name',
-      message: 'What is your name?',
+    type: 'input',
+    name: 'mgrName',
+    message: 'What is your name?',
     },
     {
-      type: 'input',
-      name: 'location',
-      message: 'Where are you from?',
+    type: 'input',
+    name: 'mgrID',
+    message: 'What is your employee ID number?',
     },
     {
-      type: 'input',
-      name: 'hobby',
-      message: 'What is your favorite hobby?',
+    type: 'input',
+    name: 'mgrEmail',
+    message: 'What is your email address?',
     },
     {
-      type: 'input',
-      name: 'food',
-      message: 'What is your favorite food?',
+    type: 'input',
+    name: 'mgrOffice',
+    message: 'What is your office number?',
     },
     {
-      type: 'input',
-      name: 'github',
-      message: 'Enter your GitHub Username',
+    type: 'list',
+    name: 'doNext',
+    message: 'What would you like to do next?',
+    choices: ["Create Engineer Profile", "Create Intern Profile", "Finish"],
     },
     {
-      type: 'input',
-      name: 'linkedin',
-      message: 'Enter your LinkedIn URL.',
+    type: 'input',
+    name: 'engrName',
+    message: 'What is the engineer\'s name?',
     },
-  ])
+    {
+    type: 'input',
+    name: 'engrID',
+    message: 'What is the engineer\'s employee ID number?',
+    },
+    {
+    type: 'input',
+    name: 'engrEmail',
+    message: 'What is the engineer\'s email address?',
+    },
+    {
+    type: 'input',
+    name: 'engrGitHub',
+    message: 'What is the engineer\'s GitHub username?',
+    },
+    {
+    type: 'input',
+    name: 'intName',
+    message: 'What is the intern\'s name?',
+    },
+    {
+    type: 'input',
+    name: 'intID',
+    message: 'What is the intern\'s employee ID number?',
+    },
+    {
+    type: 'input',
+    name: 'intEmail',
+    message: 'What is the intern\'s email address?',
+    },
+    {
+    type: 'input',
+    name: 'intSchool',
+    message: 'What is the intern\'s school name?',
+    }
+    ])
+
   .then((answers) => {
     const htmlPageContent = generateHTML(answers);
 
-    fs.writeFile('index.html', htmlPageContent, (err) =>
+    fs.writeFile('./dist/index.html', htmlPageContent, (err) =>
       err ? console.log(err) : console.log('Successfully created index.html!')
     );
   });
