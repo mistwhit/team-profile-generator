@@ -1,6 +1,10 @@
 const inquirer = require('inquirer');
 const jest = require('jest');
 const fs = require('fs');
+const Employee = require('./lib/Employee');
+const Manager = require('./lib/Manager');
+const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Employee');
 
 const generateHTML = ({ mgrName, mgrID, mgrEmail, mgrOffice, engrName, engrID, engrEmail, engrGitHub, intName, intID, intEmail, intSchool }) =>
   `<!DOCTYPE html>
